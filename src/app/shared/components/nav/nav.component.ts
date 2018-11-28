@@ -7,7 +7,6 @@ import { config } from "../../../app.config";
 import { AuthService } from "../../services/auth/auth.service";
 
 @Component({
-  moduleId: module.id,
   selector: 'app-nav',
   templateUrl: 'nav.component.html',
   styleUrls: ['nav.component.scss']
@@ -18,11 +17,11 @@ export class NavComponent implements OnInit {
 
   private currentLang: string;
 
-  private CONFIG = config;
+  CONFIG = config;
 
   @Input() private currentUser: any;
 
-  constructor(private authService: AuthService) {
+constructor(public authService: AuthService) {
     this.appName = config.appName;
   }
 

@@ -3,12 +3,14 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // Services
 import { HologramService } from "./shared/services/hologram/hologram.service";
 import { UserService } from "./shared/services/user/user.service";
 import { AuthService } from "./shared/services/auth/auth.service";
 import { AuthGuard } from "./shared/services/auth/auth.guard";
+import { TokenInterceptorService } from './shared/services/auth/token-interceptor.service';
 
 // Pipes
 import { CapitalizePipe } from "./shared/pipes/capitalize.pipe";
@@ -50,7 +52,12 @@ import { LoginComponent } from './components/login/login.component';
     HologramService,
     UserService,
     AuthService,
-    AuthGuard
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

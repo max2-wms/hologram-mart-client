@@ -11,7 +11,7 @@ import { HologramService } from "../../shared/services/hologram/hologram.service
 })
 export class HologramComponent implements OnInit {
 
-  private hologram: any;
+  hologram: any;
 
   constructor(private hologramService: HologramService,
               private activatedRoute: ActivatedRoute,

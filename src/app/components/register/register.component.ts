@@ -14,7 +14,7 @@ export class RegisterComponent implements OnInit {
 
   private pageTitle: string = 'nav.register';
 
-  private registerForm: FormGroup;
+  registerForm: FormGroup;
 
   private registerEvent: EventEmitter<any>;
 

@@ -11,7 +11,7 @@ import { HologramService } from "../../shared/services/hologram/hologram.service
 })
 export class HologramsComponent implements OnInit {
 
-  private holograms = [];
+  holograms = [];
 
   constructor(private hologramService: HologramService,
               private router: Router) { }

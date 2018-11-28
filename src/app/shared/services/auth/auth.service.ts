@@ -31,6 +31,10 @@ export class AuthService {
     return !!localStorage.getItem(this.TOKEN_KEY);
   }
 
+  public getToken(): string {
+    return localStorage.getItem('token');
+  }
+
   public set isAuthenticated(value: boolean) {
     // empty implementation just for the purposes of testing
   }

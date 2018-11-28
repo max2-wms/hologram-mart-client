@@ -12,7 +12,7 @@ import { HologramService } from "../../shared/services/hologram/hologram.service
 })
 export class AddHologramComponent implements OnInit {
 
-  private hologramForm: FormGroup;
+  hologramForm: FormGroup;
 
   constructor(private router: Router,
               private fb: FormBuilder,

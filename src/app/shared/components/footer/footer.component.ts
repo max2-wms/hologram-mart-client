@@ -10,7 +10,7 @@ import { config } from "../../../app.config";
 })
 export class FooterComponent implements OnInit {
 
-  private CONFIG = config;
+  CONFIG = config;
 
   constructor() { }
 
