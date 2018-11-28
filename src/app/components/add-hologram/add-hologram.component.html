@@ -1,0 +1,22 @@
+<form [formGroup]="hologramForm" (ngSubmit)="onSubmit(hologramForm.value)">
+    <fieldset>
+        <legend>Add Hologram</legend>
+        <div class="form-group">
+            <label for="exampleInputEmail1">First Name</label>
+            <input type="email" class="form-control" name="firstname" formControlName="firstname" placeholder="Enter First Name">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Last Name</label>
+            <input type="email" class="form-control" name="lastname" formControlName="lastname" placeholder="Enter Last Name">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Image URL</label>
+            <input type="email" class="form-control" name="imageUrl" formControlName="imageUrl" placeholder="Enter Image URL">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Price</label>
+            <input type="number" class="form-control" name="price" formControlName="price" placeholder="Enter Price">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </fieldset>
+</form>
