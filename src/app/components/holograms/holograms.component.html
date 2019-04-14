@@ -7,12 +7,12 @@
     <div *ngFor="let hologram of holograms" class="card mb-3">
         <h3 class="card-header">
             <span>{{ hologram.firstname }} {{ hologram.lastname }} </span>
-    
+
             <button (click)="deleteHologram(hologram._id)" type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </h3>
-        <img style="height: 200px; width: 100%; display: block;" [src]="hologram.imageUrl" alt="hologram.firstname">
+        <img [src]="hologram.imageUrl" alt="hologram.firstname">
         <ul class="list-group list-group-flush">
             <li class="list-group-item">Price: {{ hologram.price | currency }}</li>
         </ul>
