@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  backendHost: ""
+  backendHost: "//hologram-mart.webmediasolutionz.io:63145"
 };

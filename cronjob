@@ -1,0 +1,2 @@
+# cron command to renew certificates
+30 2 * * 1 /usr/local/sbin/le-renew-webroot >> /var/log/le-renew.log

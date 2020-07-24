@@ -1,0 +1,55 @@
+version: '3.3'
+
+services:
+
+    hlm_client:
+        container_name: client
+        # TODO: might want to pin down a specific version of this image
+        # TODO: create a Dockerfile for this image
+        image: max2wms/hologram-mart-client
+        volumes:
+            - /app/node_modules
+            - ..:/app
+        ports:
+            - '4200:4200'
+        networks:
+            - frontend
+        command: ng serve --host 0.0.0.0
+        depends_on:
+            - hlm_server
+
+    hlm_server:
+        container_name: server
+        # TODO: might want to pin down a specific version of this image
+        # TODO: create a Dockerfile for this image
+        image: max2wms/angular-dev-env
+        volumes:
+            - ../../hlm_server:/app
+        ports:
+            - '63145:63145'
+        networks:
+            - backend
+            - frontend
+        command: bash -c "NODE_ENV=docker security_mode=http nodemon"
+        depends_on:
+            - hlm_db
+
+    hlm_db:
+        container_name: db
+        # TODO: pin down a specific version of mongo
+        image: mongo
+        environment:
+            - MONGO_DATA_DIR=/data/db
+            - MONGO_LOG_DIR=/dev/null
+        volumes:
+            - 'mongo_db:/data/db'
+        networks:
+            - backend
+        command: mongod --logpath=/dev/null # --quiet
+
+networks:
+    backend:
+    frontend:
+
+volumes:
+    mongo_db:

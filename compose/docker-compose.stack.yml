@@ -1,0 +1,76 @@
+version: '3.3'
+
+services:
+    # docker run -it -d -p 8080:8080 -v /var/run/docker.sock:/var/run/docker.sock dockersamples/visualizer
+    viz:
+        image: dockersamples/visualizer
+        ports:
+            - '8080:8080'
+        networks:
+            - frontend
+            - backend
+        volumes:
+            - '/var/run/docker.sock:/var/run/docker.sock'
+        depends_on:
+            - db
+            - server
+            - client
+            - portainer
+
+    # docker run --name portainer -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer
+    portainer:
+        image: portainer/portainer
+        ports:
+            - '9000:9000'
+        networks:
+            - frontend
+            - backend
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+        depends_on:
+            - db
+            - server
+            - client
+            - viz
+
+    client:
+        image: 'max2wms/hologram-mart-client'
+        deploy:
+            replicas: 2
+        ports:
+            - '80:80'
+            - '443:443'
+        networks:
+            - frontend
+        depends_on:
+            - server
+
+    server:
+        image: 'max2wms/hologram-mart-server'
+        ports:
+            - '63145:63145'
+        networks:
+            - backend
+            - frontend
+        depends_on:
+            - db
+
+    db:
+        image: 'mongo'
+        ports:
+            - '27017:27017'
+        environment:
+            - MONGO_DATA_DIR=/data/db
+            - MONGO_LOG_DIR=/dev/null
+        networks:
+            - backend
+        volumes:
+            - 'mongo_db:/data/db'
+        command: mongod --logpath=/dev/null
+
+networks:
+    backend:
+    frontend:
+
+volumes:
+    mongo_db:

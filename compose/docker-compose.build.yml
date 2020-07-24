@@ -1,0 +1,47 @@
+version: '3.3'
+
+services:
+
+    hlm_client:
+        container_name: client
+        build: ..
+        image: max2wms/hologram-mart-client
+        ports:
+            - "80:80"
+            - "443:443"
+        networks:
+            - frontend
+        depends_on:
+            - hlm_server
+
+    hlm_server:
+        container_name: server
+        build: ../../server
+        image: max2wms/hologram-mart-server
+        ports:
+            - "63145:63145"
+        networks:
+            - backend
+            - frontend
+        depends_on:
+            - hlm_db
+
+    hlm_db:
+        container_name: db
+        # TODO: pin down a specific version of mongo
+        image: mongo
+        environment:
+            - MONGO_DATA_DIR=/data/db
+            - MONGO_LOG_DIR=/dev/null
+        volumes:
+            - "mongo_db:/data/db"
+        networks:
+            - backend
+        command: mongod --logpath=/dev/null # --quiet
+
+networks:
+    backend:
+    frontend:
+
+volumes:
+    mongo_db:

@@ -5,11 +5,28 @@
   "main": "main.js",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "docker-compose -f compose/docker-compose.dev.yml up",
+    "stop": "docker-compose -f compose/docker-compose.dev.yml down",
+    "build:images": "docker-compose -f compose/docker-compose.build.yml build",
+    "build:image": "docker build -t max2wms/hologram-mart-client .",
+    "push:image": "docker push max2wms/hologram-mart-client",
+    "start:build": "docker-compose -f compose/docker-compose.build.yml up --build",
+    "stop:build": "docker-compose -f compose/docker-compose.build.yml down",
+    "start:prod": "docker-compose -f compose/docker-compose.prod.yml up",
+    "stop:prod": "docker-compose -f compose/docker-compose.prod.yml down",
+    "swarm:init": "docker swarm init",
+    "swarm:leave": "docker swarm leave --force",
+    "start:swarm": "docker stack deploy -c compose/docker-compose.stack.yml fbl",
+    "stop:swarm": "docker stack rm fbl",
     "build": "ng build",
-    "test": "ng test",
+    "build:prod": "ng build --prod",
+    "test": "ng test --code-coverage --watch",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "lint:fix": "ng lint --fix",
+    "format:fix": "pretty-quick --staged",
+    "e2e": "ng e2e",
+    "compodoc": "npx compodoc -p src/tsconfig.app.json",
+    "postinstall": "npm rebuild node-sass"
   },
   "author": "Maxime Pierre <maxime.pierre@webmediasolutionz.com>",
   "license": "ISC",
@@ -57,5 +74,11 @@
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
     "typescript": "~3.1.6"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lerna run test",
+      "pre-push": "npm test"
+    }
   }
 }
