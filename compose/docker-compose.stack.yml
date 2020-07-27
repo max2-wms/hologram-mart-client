@@ -1,7 +1,7 @@
 version: '3.3'
 
 services:
-    # docker run -it -d -p 8080:8080 -v /var/run/docker.sock:/var/run/docker.sock dockersamples/visualizer
+
     viz:
         image: dockersamples/visualizer
         ports:
@@ -17,7 +17,6 @@ services:
             - client
             - portainer
 
-    # docker run --name portainer -d -p 9000:9000 -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer
     portainer:
         image: portainer/portainer
         ports:
@@ -35,8 +34,6 @@ services:
 
     client:
         image: 'max2wms/hologram-mart-client'
-        deploy:
-            replicas: 2
         ports:
             - '80:80'
             - '443:443'

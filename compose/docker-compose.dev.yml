@@ -6,7 +6,7 @@ services:
         container_name: client
         # TODO: might want to pin down a specific version of this image
         # TODO: create a Dockerfile for this image
-        image: max2wms/hologram-mart-client
+        image: max2wms/angular-dev-env
         volumes:
             - /app/node_modules
             - ..:/app
