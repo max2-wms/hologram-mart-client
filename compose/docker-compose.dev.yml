@@ -24,7 +24,7 @@ services:
         # TODO: create a Dockerfile for this image
         image: max2wms/angular-dev-env
         volumes:
-            - ../../hlm_server:/app
+            - ../../server:/app
         ports:
             - '63145:63145'
         networks:
