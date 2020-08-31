@@ -23,7 +23,7 @@ WORKDIR /app/
 
 COPY package.json package.json
 
-RUN npm i && npm i -g @angular/cli@6
+RUN npm i && npm i -g @angular/cli@6.2.9
 
 COPY . .
 
