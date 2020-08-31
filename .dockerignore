@@ -1,0 +1,11 @@
+.DS_Store
+.vscode
+/coverage/*
+/documentation/*
+.git
+.gitignore
+docker-compose.yml
+Dockerfile
+Jenkinsfile
+README.md
+package-lock.json
